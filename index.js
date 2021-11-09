@@ -66,9 +66,12 @@ Use the higher-order function getWinners to do the following:
 
 function getWinners(arr, func) {
     const newArr = func(arr);
-    const winners = newArr.forEach(element => {
+    const winners = [];
+    newArr.forEach(element => {
         if(element["Home Team Goals"] > element["Away Team Goals"]){
-            return element["Home Team Name"];
+            winners.push(element["Home Team Name"]);
+        }else if (element["Home Team Goals"] < element["Away Team Goals"]){
+            winners.push(element["Away Team Name"]);
         }
     });
     return winners;
@@ -87,8 +90,15 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(arr, func, secondFunc, getWinners) {
+    const finalArr = func(arr);
+    const yearArr = secondFunc(finalArr, func);
+    let winnerArr = getWinners(finalArr, func);
+    const winners = [];
+    for(let i = 0;i < winnerArr.length;i++){
+        winners.push(`In ${yearArr[i]}, ${winnerArr[i]} won the world cup!`);
+    }
+    return winners
 }
 
 
@@ -103,10 +113,14 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
-}
+function getAverageGoals(data) {
+   const averageGoal = data.reduce((total, team) => {
+    return (total += team["Home Team Goals"] + team["Away Team Goals"])}, 0);
 
+   const averageGPG = averageGoal/data.length;
+   return averageGPG.toFixed(2);
+}
+getAverageGoals(getFinals(fifaData))
 
 
 
