@@ -93,12 +93,13 @@ hint: the strings returned need to exactly match the string in step 4.
 function getWinnersByYear(arr, func, secondFunc, getWinners) {
     const finalArr = func(arr);
     const yearArr = secondFunc(finalArr, func);
-    let winnerArr = getWinners(finalArr, func);
-    const winners = [];
-    for(let i = 0;i < winnerArr.length;i++){
-        winners.push(`In ${yearArr[i]}, ${winnerArr[i]} won the world cup!`);
-    }
-    return winners
+    const winnerArr = getWinners(finalArr, func);
+    // const winners = [];
+    // for(let i = 0;i < winnerArr.length;i++){
+    //     winners.push(`In ${yearArr[i]}, ${winnerArr[i]} won the world cup!`);
+    // }
+    // return winners
+    
 }
 
 
